@@ -8,9 +8,12 @@ fs.writeFileSync(
     .split("\n\n")
     .map(item => {
       const line = item.split("\n")
-      const title = line[0]
-      const link = line[1]
-      return `* [${title}](${link})`
+      return {
+        title: line[0],
+        link: line[1]
+      }
     })
+    .filter(item => item.title !== "" && item.link !== undefined)
+    .map(item => `* [${item.title}](${item.link})`)
     .join("\n")
 )
